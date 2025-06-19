@@ -1,5 +1,9 @@
 name: oneplus_13T
 on:
+  push:
+   tags:
+    -'v1.0.0'
+    
   workflow_dispatch:
     inputs:
       KERNEL_SUFFIX:
@@ -308,3 +312,11 @@ jobs:
         with:
          name: SuKiSu_${{ env.KSUVER }}_oneplus_13t
          path: ./AnyKernel3/*
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+         name: OnePlus13T Release: SuKiSu_${{ env.KSUVER }}
+         files: ./AnyKernel3/*
+        env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
