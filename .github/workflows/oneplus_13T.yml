@@ -1,9 +1,5 @@
 name: oneplus_13T
 on:
-  push:
-    tags:
-      - 'v1.0.0'
-    
   workflow_dispatch:
     inputs:
       KERNEL_SUFFIX:
