@@ -17,17 +17,17 @@ on:
       enable_feature_x:
        description: "是否启用kpm"
        required: false
-       default: false
+       default: true
        type: boolean
       enable_feature_y:
        description: "是否启用lz4kd"
        required: false
-       default: false
+       default: true
        type: boolean
       enable_feature_z:
        description: "是否添加风驰驱动"
        required: false
-       default: false
+       default: true
        type: boolean
       
        
@@ -55,14 +55,15 @@ jobs:
           
       - name: Configure Git
         run: |
-         git config --global user.name "Futaba"
-         git config --global user.email "3199167602@qq.com"
+         git config --global user.name "44C38B8"
+         git config --global user.email "b2762537725@163.com"
 
       - name: Install dependencies
         run: |
           sudo apt update && sudo apt upgrade -y
           sudo apt install -y python3 git curl
           sudo apt install -y python3 git curl ccache
+          sudo apt install -y zip
 
       - name: Restore ccache
         uses: actions/cache@v3
@@ -313,10 +314,15 @@ jobs:
          name: SuKiSu_${{ env.KSUVER }}_oneplus_13t
          path: ./AnyKernel3/*
 
+      - name: Create module ZIP
+        run: |
+         cd ./AnyKernel3/
+         zip ./SuKiSu_${{ env.KSUVER }}_oneplus_13t.zip *
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
          name: OnePlus13T Release SuKiSu_${{ env.KSUVER }}
-         files: ./AnyKernel3/*
+         files: ./AnyKernel3/*.zip
         env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
