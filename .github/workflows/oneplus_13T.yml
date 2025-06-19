@@ -2,7 +2,7 @@ name: oneplus_13T
 on:
   push:
     tags:
-      - 'v1.0.0'
+      - 'v*'
       
   workflow_dispatch:
     inputs:
