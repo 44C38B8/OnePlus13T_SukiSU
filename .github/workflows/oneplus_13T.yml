@@ -3,35 +3,6 @@ on:
   push:
     tags:
       - 'v*'
-      
-  workflow_dispatch:
-    inputs:
-      KERNEL_SUFFIX:
-        description: '内核名称修改(可改中文和emoji)'
-        required: true
-        default: '-android15-8-44C38B8'
-      KERNEL_TIME:
-       description: "内核构建日期更改(默认为原厂)"
-       required: true
-       default: 'Tue Dec 17 23:36:49 UTC 2024'
-      enable_feature_x:
-       description: "是否启用kpm"
-       required: false
-       default: true
-       type: boolean
-      enable_feature_y:
-       description: "是否启用lz4kd"
-       required: false
-       default: true
-       type: boolean
-      enable_feature_z:
-       description: "是否添加风驰驱动"
-       required: false
-       default: true
-       type: boolean
-      
-       
-
 
 jobs:
   build:
@@ -63,7 +34,7 @@ jobs:
           sudo apt update && sudo apt upgrade -y
           sudo apt install -y python3 git curl
           sudo apt install -y python3 git curl ccache
-          sudo apt install -y zip
+          sudo apt install -y zip fastfetch
 
       - name: Restore ccache
         uses: actions/cache@v3
@@ -75,6 +46,7 @@ jobs:
 
       - name: Install repo tool
         run: |
+         fastfetch
          curl https://storage.googleapis.com/git-repo-downloads/repo > ~/repo
          chmod a+x ~/repo
          sudo mv ~/repo /usr/local/bin/repo
@@ -204,7 +176,7 @@ jobs:
 
  
       - name: Apply lz4kd Patches
-        if: ${{inputs.enable_feature_y }}
+        
         run: |
           cd kernel_workspace/kernel_platform/common
             cp ../../SukiSU_patch/other/zram/zram_patch/6.6/lz4kd.patch ./
@@ -258,7 +230,7 @@ jobs:
           git add -A && git commit -a -m "BUILD Kernel"
       
       - name: Add KPM Configuration Settings
-        if: ${{inputs.enable_feature_x }}
+        
         run: |
           cd kernel_workspace/kernel_platform
           echo "CONFIG_KPM=y" >> ./common/arch/arm64/configs/gki_defconfig
@@ -272,10 +244,10 @@ jobs:
         run: |
          cd kernel_workspace/kernel_platform
          sed -i 's/${scm_version}//' ./common/scripts/setlocalversion
-         sudo sed -i 's/-4k/${{ github.event.inputs.KERNEL_SUFFIX }}/g' ./common/arch/arm64/configs/gki_defconfig
+         sudo sed -i 's/-4k/-android15-8-44C38B8/g' ./common/arch/arm64/configs/gki_defconfig
 
       - name: Add sched_ext
-        if: ${{inputs.enable_feature_z }}
+        
         run: |
          cd kernel_workspace/kernel_platform/
          git clone https://github.com/HanKuCha/sched_ext.git
@@ -285,7 +257,7 @@ jobs:
 
       - name: Build Kernel
         run: |
-          export KBUILD_BUILD_TIMESTAMP="${{ github.event.inputs.KERNEL_TIME }}"
+          export KBUILD_BUILD_TIMESTAMP="Tue Dec 17 23:36:49 UTC 2024"
           export PATH="$GITHUB_WORKSPACE/kernel_workspace/kernel_platform/prebuilts/clang/host/linux-x86/clang-r510928/bin:$PATH"
           export PATH="/usr/lib/ccache:$PATH"
           sudo apt install libelf-dev
