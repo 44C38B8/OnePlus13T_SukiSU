@@ -293,7 +293,7 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-         name: OnePlus13T Release SuKiSu_${{ env.KSUVER }}
+         name: OnePlus13T Release SukiSU_${{ env.KSUVER }}
          files: ./AnyKernel3/*.zip
         env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
