@@ -34,7 +34,7 @@ jobs:
           sudo apt update && sudo apt upgrade -y
           sudo apt install -y python3 git curl
           sudo apt install -y python3 git curl ccache
-          sudo apt install -y zip fastfetch
+          sudo apt install -y zip
 
       - name: Restore ccache
         uses: actions/cache@v3
@@ -46,7 +46,6 @@ jobs:
 
       - name: Install repo tool
         run: |
-         fastfetch
          curl https://storage.googleapis.com/git-repo-downloads/repo > ~/repo
          chmod a+x ~/repo
          sudo mv ~/repo /usr/local/bin/repo
