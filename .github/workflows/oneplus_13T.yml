@@ -317,7 +317,7 @@ jobs:
       - name: Create module ZIP
         run: |
          cd ./AnyKernel3/
-         zip ./SukiSU_${{ env.KSUVER }}_OnePlus_13T.zip *
+         zip -r ./SukiSU_${{ env.KSUVER }}_OnePlus_13T.zip *
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
