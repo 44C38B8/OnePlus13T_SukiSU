@@ -1,8 +1,7 @@
 name: oneplus_13T
 on:
-  push:
-    tags:
-      - 'v*'
+  schedule:
+    - cron: '0 22 * * *'
 
 jobs:
   build:
@@ -291,9 +290,10 @@ jobs:
          zip -r ./SukiSU_${{ env.KSUVER }}_OnePlus_13T.zip *
 
       - name: Create Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v1
         with:
          name: OnePlus13T Release SukiSU_${{ env.KSUVER }}
+         tag_name: $(date +'%Y-%m-%d')
          files: ./AnyKernel3/*.zip
         env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
