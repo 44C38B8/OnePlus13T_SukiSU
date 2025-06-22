@@ -1,4 +1,4 @@
 # build OnePlus Kernel
 
-oneplus_13,13t,a5p sukisu
+特别鸣谢：GitHub@HanKuCka（酷安@FutabaWa）
 
