@@ -256,7 +256,7 @@ jobs:
 
       - name: Build Kernel
         run: |
-          export KBUILD_BUILD_TIMESTAMP="Tue Dec 17 23:36:49 UTC 2024"
+          export KBUILD_BUILD_TIMESTAMP="Fri Apr 25 01:56:53 UTC 2025"
           export PATH="$GITHUB_WORKSPACE/kernel_workspace/kernel_platform/prebuilts/clang/host/linux-x86/clang-r510928/bin:$PATH"
           export PATH="/usr/lib/ccache:$PATH"
           sudo apt install libelf-dev
