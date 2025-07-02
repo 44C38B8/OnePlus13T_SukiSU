@@ -1,4 +1,3 @@
-# build OnePlus Kernel
-
-特别鸣谢：GitHub@HanKuCka（酷安@FutabaWa）
+# 因GitHub上游同步的bug，本项目暂停更新
+新项目地址：https://github.com/44C38B8/oneplus13_a5p_sukisu
 
